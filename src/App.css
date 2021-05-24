@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+  display: flex;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.Wrapper {
+  border-radius: 15px;
+  border: 2px solid #61dafb;
+  height: 600px;
+  width: 400px;
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0px 0px 50px 5px #61dafb;
+}
+
+.Window {
+  padding-top: 20px;
+  height: 100vh;
+}
+
+.Header {
+  color: #61dafb;
+}
