@@ -17,6 +17,9 @@ function App() {
   }
 
   function cleanBin(num) {
+    if(num.length === 0) {
+      return [true, ""];
+    }
     if (isNaN(num)) {
       return [true, num];
     }
@@ -30,6 +33,9 @@ function App() {
   }
 
   function cleanHex(num) {
+    if(num.length === 0) {
+      return [true, ""];
+    }
     let allowed = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
     let str = num.toString();
     for(let i = 0; i < str.length; i++){
@@ -41,6 +47,9 @@ function App() {
   }
 
   function cleanOct(num) {
+    if(num.length === 0) {
+      return [true, ""];
+    }
     if (isNaN(num))
       return [true, num];
 
@@ -80,7 +89,8 @@ function App() {
     }
 
     if (err) {
-      setcol('#FF8095'); //set background red
+      if(updatedValue !== "")
+        setcol('#FF8095'); //set background red
 
       setdec(updatedValue);
       setbin(updatedValue);
