@@ -1,6 +1,10 @@
 import './App.css';
 import Textarea from './Textarea'
+import RoundSwitch from './RoundSwitch';
 import React, { useState } from 'react';
+
+let toggle = 1;
+let back = '#424242';
 
 function App() {
 
@@ -8,9 +12,13 @@ function App() {
   const [bin, setbin] = useState(0);
   const [hex, sethex] = useState(0);
   const [oct, setoct] = useState(0);
-  const [col, setcol] = useState('white');
+  //const [back, setback] = useState('#424242');
+  const [col, setcol] = useState(back);
 
   function cleanDec(num) {
+    if(num.length === 0) {
+      return [true, ""];
+    }
     if (isNaN(num))
       return [true, num];
     return [false, num];
@@ -65,8 +73,6 @@ function App() {
 
     let updatedValue = event.target.value;
 
-    console.log(type);
-
     let err = false;
 
     switch (type) {
@@ -89,8 +95,11 @@ function App() {
     }
 
     if (err) {
-      if(updatedValue !== "")
-        setcol('#FF8095'); //set background red
+
+      setcol('#FF8095'); //set background red
+
+      if(updatedValue === "")
+        setcol(back); //set background red
 
       setdec(updatedValue);
       setbin(updatedValue);
@@ -104,20 +113,37 @@ function App() {
         updatedValue = 0;
         alert("Overflow! lol");
       }
-      setcol('white'); //set background white
+      setcol(back); //set background white
 
       setdec(updatedValue);
       setbin((updatedValue >>> 0).toString(2));
       sethex((updatedValue >>> 0).toString(16));
       setoct((updatedValue >>> 0).toString(8));
     }
-    console.log(updatedValue.toString());
+  }
+
+  function colorMode() {
+    console.log(toggle);
+    if(toggle % 2 === 1)
+    {
+      back = ('white');
+    }
+    if(toggle % 2 === 0)
+    {
+      back = ('#424242'); 
+    }
+    toggle++;
+    if(col !== '#FF8095')
+    setcol(back);
   }
 
   return (
     <div className="Window" style={{backgroundColor: (col)}}>
-      <div className="App">
+      <div className="App" >        
         <div className='Wrapper'>
+          <div onChange={colorMode}>
+            <RoundSwitch />
+          </div>
           <h1 className='Header'>
             Decimal
           </h1>
