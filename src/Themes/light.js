@@ -1,7 +1,7 @@
-import {createMuiTheme} from '@material-ui/core';
+import { createTheme } from '@material-ui/core';
 import { lightGreen, red } from '@material-ui/core/colors';
 
-export const lightTheme = createMuiTheme({
+export const lightTheme = createTheme({
     palette: {
         type: 'light',
         text: {
