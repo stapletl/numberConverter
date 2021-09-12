@@ -19,7 +19,7 @@ const convertBase = (value, from_base, to_base) => {
         new_value = to_range[dec_value % to_base] + new_value;
         dec_value = (dec_value - dec_value % to_base) / to_base;
     }
-    return new_value || "0";
+    return new_value || "";
 };
 
 export default convertBase;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextField, Typography, makeStyles} from '@material-ui/core/';
-import getValidInput from '../getValidInput';
+import getValidInput from '../functions/getValidInput';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +29,9 @@ const InputField = props => {
                 id="cardNumber"
                 value={num.value}
                 onChange={e => handleFieldUpdate(e)}
+                multiline
                 fullWidth
+                autoComplete={false}
             />
         </div>
     );
