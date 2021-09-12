@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, AppBar, Toolbar, Paper, Link, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { makeStyles, AppBar, Toolbar, Paper, Typography } from '@material-ui/core';
 import InputField from './InputField';
 import convertBase from '../functions/convertbase'
 import Copyright from './Copyright';
+import ThemeSwitch from '../Themes/ThemeSwitch'
 
 const useStyles = makeStyles((theme) => ({
+    title: {
+        flexGrow: 1
+    },
     appBar: {
         position: 'relative',
     },
@@ -36,7 +40,7 @@ const Layout = () => {
     const [bin, setBin] = useState('');
     const [hex, setHex] = useState('');
     const [oct, setOct] = useState('');
-    const [asc, setAsc] = useState('');
+    //const [asc, setAsc] = useState('');
 
     const updateDec = num => {
         setBin(convertBase(num, 10, 2));
@@ -65,10 +69,11 @@ const Layout = () => {
     return (
         <>
             <AppBar position="absolute" color="primary" className={ classes.appBar }>
-                <Toolbar>
-                    <Typography variant="h5" color="inherit" noWrap>
+                <Toolbar className={ classes.toolbar }>
+                    <Typography variant="h5" color="inherit" noWrap className={ classes.title }>
                         Number Base Converter
                     </Typography>
+                    <ThemeSwitch/>
                 </Toolbar>
             </AppBar>
             <main className={ classes.layout }>
