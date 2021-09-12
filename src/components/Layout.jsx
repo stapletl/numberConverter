@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, useEffect } from 'react';
+import { makeStyles, AppBar, Toolbar, Paper, Link, Typography } from '@material-ui/core';
 import InputField from './InputField';
+import convertBase from '../convertbase'
 
 const Copyright = () => {
     return (
@@ -48,25 +44,52 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = () => {
     const classes = useStyles();
-    const [num, setNum] = useState();
+    const [dec, setDec] = useState('');
+    const [bin, setBin] = useState('');
+    const [hex, setHex] = useState('');
+    const [oct, setOct] = useState('');
+    const [asc, setAsc] = useState('');
 
+    const updateDec = num => {
+        setBin(convertBase(num, 10, 2));
+        setHex(convertBase(num, 10, 16));
+        setOct(convertBase(num, 10, 8));
+    }
+
+    const updateBin = num => {
+        setDec(convertBase(num, 2, 10));
+        setHex(convertBase(num, 2, 16));
+        setOct(convertBase(num, 2, 8));
+    }
+
+    const updateHex = num => {
+        setDec(convertBase(num, 16, 10));
+        setBin(convertBase(num, 16, 2));
+        setOct(convertBase(hex, 16, 8));
+    }
+
+    const updateOct = num => {
+        setDec(convertBase(num, 8, 10));
+        setBin(convertBase(num, 8, 2));
+        setHex(convertBase(num, 8, 16));
+    }
 
     return (
         <>
             <AppBar position="absolute" color="primary" className={ classes.appBar }>
                 <Toolbar>
-                    <Typography variant="h6" color="inherit" noWrap>
+                    <Typography variant="h5" color="inherit" noWrap>
                         Number Base Converter
                     </Typography>
                 </Toolbar>
             </AppBar>
             <main className={ classes.layout }>
                 <Paper className={ classes.paper }>
-                    <InputField label="Decimal" num={{ value: num, setValue: setNum}} />
-                    <InputField label="Binary" num={{ value: num, setValue: setNum}} />
-                    <InputField label="Hex" num={{ value: num, setValue: setNum}} />
-                    <InputField label="Octal" num={{ value: num, setValue: setNum}} />
-                    <InputField label="Ascii" num={{ value: num, setValue: setNum}} />
+                    <InputField label="Decimal" num={ { value: dec, setValue: setDec } } update={ updateDec } />
+                    <InputField label="Binary" num={ { value: bin, setValue: setBin } } update={ updateBin } />
+                    <InputField label="Hex" num={ { value: hex, setValue: setHex } } update={ updateHex } />
+                    <InputField label="Octal" num={ { value: oct, setValue: setOct } } update={ updateOct } />
+                    {/* <InputField label="Ascii" num={{ value: asc, setValue: setAsc}} /> */ }
                 </Paper>
                 <Copyright />
             </main>
